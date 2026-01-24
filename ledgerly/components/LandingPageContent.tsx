@@ -29,6 +29,45 @@ export default function LandingPageContent() {
         setMounted(true);
     }, []);
 
+    const [email, setEmail] = useState("");
+    const [loading, setLoading] = useState(false);
+    const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+    const [message, setMessage] = useState("");
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        if (!email) return;
+
+        setLoading(true);
+        setStatus("idle");
+        setMessage("");
+
+        try {
+            const res = await fetch('/api/subscribe', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email }),
+            });
+
+            const data = await res.json();
+
+            if (res.ok) {
+                setStatus("success");
+                setMessage("Thanks! Check your inbox for the survey link.");
+                setEmail("");
+            } else {
+                setStatus("error");
+                setMessage(data.error || "Something went wrong. Please try again.");
+            }
+        } catch (error) {
+            setStatus("error");
+            setMessage("Failed to submit. Please check your connection.");
+        } finally {
+            setLoading(false);
+        }
+    };
+
+
     const scrollToSection = (id: string) => {
         const element = document.getElementById(id);
         if (element) {
@@ -361,16 +400,34 @@ export default function LandingPageContent() {
                         We're a group of 2 college students working on Ledgerly. Get early access, product updates, and the chance to shape what we build.
                     </p>
 
-                    <form className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto" onSubmit={(e) => e.preventDefault()}>
-                        <Input
-                            type="email"
-                            placeholder="you@company.com"
-                            className="bg-white border-gray-200 h-12 text-base"
-                        />
-                        <Button className="bg-[#1E3A8A] hover:bg-[#1E3A8A]/90 text-white h-12 px-6 whitespace-nowrap text-base">
-                            Get early access
-                        </Button>
-                    </form>
+                    {status === "success" ? (
+                        <div className="bg-green-50 border border-green-200 text-green-700 px-6 py-4 rounded-lg">
+                            <p className="font-semibold text-lg mb-1">🎉 Success!</p>
+                            <p>{message}</p>
+                        </div>
+                    ) : (
+                        <form className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto" onSubmit={handleSubmit}>
+                            <Input
+                                type="email"
+                                placeholder="you@company.com"
+                                className="bg-white border-gray-200 h-12 text-base"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                disabled={loading}
+                                required
+                            />
+                            <Button
+                                type="submit"
+                                className="bg-[#1E3A8A] hover:bg-[#1E3A8A]/90 text-white h-12 px-6 whitespace-nowrap text-base disabled:opacity-70 disabled:cursor-not-allowed"
+                                disabled={loading}
+                            >
+                                {loading ? "Joining..." : "Get early access"}
+                            </Button>
+                        </form>
+                    )}
+                    {status === "error" && (
+                        <p className="text-red-500 mt-4 text-sm font-medium">{message}</p>
+                    )}
                     <p className="text-xs text-gray-600 mt-4">We will mail you a survey with few questions on submitting. Please do answer them to help us!</p>
                 </div>
             </section>
