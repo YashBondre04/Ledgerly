@@ -390,16 +390,16 @@ export default function LandingPageContent() {
                                 <div>
                                     <div className="text-white font-medium text-sm mb-1">Yash Bondre</div>
                                     <div className="flex justify-center md:justify-start gap-3 text-gray-500">
-                                        <a href="#" className="text-xs hover:text-white transition-colors">GitHub</a>
-                                        <a href="#" className="text-xs hover:text-white transition-colors">LinkedIn</a>
+                                        <a href="https://github.com/YashBondre04" className="text-xs hover:text-white transition-colors">GitHub</a>
+                                        <a href="https://www.linkedin.com/in/yash-bondre/" className="text-xs hover:text-white transition-colors">LinkedIn</a>
                                     </div>
                                 </div>
                                 {/* Founder 2 */}
                                 <div>
                                     <div className="text-white font-medium text-sm mb-1">Saikiran Chevula</div>
                                     <div className="flex justify-center md:justify-start gap-3 text-gray-500">
-                                        <a href="#" className="text-xs hover:text-white transition-colors">GitHub</a>
-                                        <a href="#" className="text-xs hover:text-white transition-colors">LinkedIn</a>
+                                        <a href="https://github.com/SaikiranC08" className="text-xs hover:text-white transition-colors">GitHub</a>
+                                        <a href="https://www.linkedin.com/in/saikiran-chevula/" className="text-xs hover:text-white transition-colors">LinkedIn</a>
                                     </div>
                                 </div>
                             </div>
