@@ -18,7 +18,7 @@ export async function POST(request: Request) {
         }
 
         // 2. Check Duplicates
-        if (DataStore.exists(email)) {
+        if (await DataStore.exists(email)) {
             return NextResponse.json(
                 { message: 'You are already subscribed!' }, // Treat as success to avoid leaking info/confusion
                 { status: 200 }
@@ -36,7 +36,7 @@ export async function POST(request: Request) {
             last_emailed_at: new Date().toISOString()
         };
 
-        const stored = DataStore.addSubscriber(newSubscriber);
+        const stored = await DataStore.addSubscriber(newSubscriber);
         if (!stored) {
             return NextResponse.json(
                 { error: 'Failed to save subscription.' },
@@ -45,7 +45,8 @@ export async function POST(request: Request) {
         }
 
         // 4. Send Confirmation Email via Resend
-        await resend.emails.send({
+        console.log('Attempting to send email to:', email);
+        const emailResult = await resend.emails.send({
             from: 'Ledgerly Team <onboarding@resend.dev>', // Resend default domain
             to: email,
             replyTo: 'yashbondre04@gmail.com', // Placeholder
@@ -67,6 +68,7 @@ export async function POST(request: Request) {
                 </div>
             `
         });
+        console.log('Resend API Response:', JSON.stringify(emailResult, null, 2));
 
         return NextResponse.json({ success: true });
 

@@ -1,5 +1,4 @@
-import fs from 'fs';
-import path from 'path';
+import { supabase } from './supabase';
 
 export interface Subscriber {
     email: string;
@@ -11,48 +10,74 @@ export interface Subscriber {
     last_emailed_at: string | null;
 }
 
-const DATA_DIR = path.join(process.cwd(), 'data');
-const FILE_PATH = path.join(DATA_DIR, 'subscribers.json');
-
-// Ensure data directory exists
-if (!fs.existsSync(DATA_DIR)) {
-    fs.mkdirSync(DATA_DIR, { recursive: true });
-}
-
-// Ensure file exists with empty array if not present
-if (!fs.existsSync(FILE_PATH)) {
-    fs.writeFileSync(FILE_PATH, JSON.stringify([], null, 2), 'utf8');
-}
-
 export const DataStore = {
-    getAllSubscribers: (): Subscriber[] => {
+    getAllSubscribers: async (): Promise<Subscriber[]> => {
         try {
-            const data = fs.readFileSync(FILE_PATH, 'utf8');
-            return JSON.parse(data) as Subscriber[];
+            const { data, error } = await supabase
+                .from('subscribers')
+                .select('*')
+                .order('signup_date', { ascending: false });
+
+            if (error) {
+                console.error('Error fetching subscribers:', error);
+                return [];
+            }
+
+            return data as Subscriber[];
         } catch (error) {
-            console.error('Error reading subscribers file:', error);
+            console.error('Error reading subscribers:', error);
             return [];
         }
     },
 
-    addSubscriber: (subscriber: Subscriber): boolean => {
+    addSubscriber: async (subscriber: Subscriber): Promise<boolean> => {
         try {
-            const subscribers = DataStore.getAllSubscribers();
-            // Check for duplicates
-            if (subscribers.some(s => s.email === subscriber.email)) {
-                return false; // Already exists
+            const { error } = await supabase
+                .from('subscribers')
+                .insert({
+                    email: subscriber.email,
+                    signup_date: subscriber.signup_date,
+                    source: subscriber.source,
+                    survey_sent: subscriber.survey_sent,
+                    survey_completed: subscriber.survey_completed,
+                    reward_eligible: subscriber.reward_eligible,
+                    last_emailed_at: subscriber.last_emailed_at
+                });
+
+            if (error) {
+                if (error.code === '23505') {
+                    // Duplicate email - already exists
+                    console.log('Subscriber already exists:', subscriber.email);
+                    return false;
+                }
+                console.error('Error adding subscriber:', error);
+                return false;
             }
-            subscribers.push(subscriber);
-            fs.writeFileSync(FILE_PATH, JSON.stringify(subscribers, null, 2), 'utf8');
+
             return true;
         } catch (error) {
-            console.error('Error writing subscribers file:', error);
+            console.error('Error writing subscriber:', error);
             return false;
         }
     },
 
-    exists: (email: string): boolean => {
-        const subscribers = DataStore.getAllSubscribers();
-        return subscribers.some(s => s.email === email);
+    exists: async (email: string): Promise<boolean> => {
+        try {
+            const { data, error } = await supabase
+                .from('subscribers')
+                .select('email')
+                .eq('email', email)
+                .single();
+
+            if (error && error.code !== 'PGRST116') {
+                // PGRST116 = no rows found, which is fine
+                console.error('Error checking subscriber:', error);
+            }
+
+            return !!data;
+        } catch (error) {
+            console.error('Error checking subscriber existence:', error);
+            return false;
+        }
     }
 };
