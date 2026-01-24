@@ -29,6 +29,14 @@ export default function LandingPageContent() {
         setMounted(true);
     }, []);
 
+    const scrollToSection = (id: string) => {
+        const element = document.getElementById(id);
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
+
     return (
         <div className="min-h-screen flex flex-col font-sans">
             {/* Logo - Top Left */}
@@ -83,10 +91,17 @@ export default function LandingPageContent() {
                         Ledgerly gives founders a single, clear view of all SaaS subscriptions, owners, and monthly spend — without spreadsheets or finance headaches.
                     </p>
                     <div className="flex flex-col w-full sm:w-auto sm:flex-row items-center justify-center gap-4">
-                        <Button className="bg-blue-700 hover:bg-blue-600 text-white px-8 py-6 text-lg rounded-full w-full sm:w-auto">
-                            Join early access
+                        <Button
+                            onClick={() => scrollToSection('email-section')}
+                            className="bg-blue-700 hover:bg-blue-600 text-white px-8 py-6 text-lg rounded-full w-full sm:w-auto"
+                        >
+                            In pre production
                         </Button>
-                        <Button variant="link" className="text-green-400 hover:text-green-300 gap-2 text-lg w-full sm:w-auto h-auto py-2">
+                        <Button
+                            variant="link"
+                            onClick={() => scrollToSection('chaos-to-clarity')}
+                            className="text-green-400 hover:text-green-300 gap-2 text-lg w-full sm:w-auto h-auto py-2"
+                        >
                             See how it works <ArrowRight className="w-4 h-4 ml-1" />
                         </Button>
                     </div>
@@ -143,7 +158,7 @@ export default function LandingPageContent() {
 
 
             {/* Solution Section */}
-            <section className="py-12 md:py-20 bg-[#F9FAFC] text-center">
+            <section id="chaos-to-clarity" className="py-12 md:py-20 bg-[#F9FAFC] text-center">
                 <div className="container mx-auto px-4">
                     <h2 className="text-3xl font-bold text-gray-900 mb-4">
                         From chaos to clarity in minutes
@@ -284,11 +299,11 @@ export default function LandingPageContent() {
                             </div>
                             <div className="space-y-4">
                                 <div className="flex items-start gap-3">
-                                    <Zap className="w-5 h-5 text-gray-900 mt-0.5 flex-shrink-0" />
+                                    <Zap className="w-5 h-5 text-gray-900 mt-0.5 shrink-0" />
                                     <span className="text-sm font-semibold text-gray-700">Quick setup</span>
                                 </div>
                                 <div className="flex items-start gap-3">
-                                    <FileText className="w-5 h-5 text-gray-900 mt-0.5 flex-shrink-0" />
+                                    <FileText className="w-5 h-5 text-gray-900 mt-0.5 shrink-0" />
                                     <div className="text-sm text-gray-700">
                                         <strong className="font-semibold">Manual subscription</strong>
                                         <br />
@@ -296,7 +311,7 @@ export default function LandingPageContent() {
                                     </div>
                                 </div>
                                 <div className="flex items-start gap-3">
-                                    <Bell className="w-5 h-5 text-gray-900 mt-0.5 flex-shrink-0" />
+                                    <Bell className="w-5 h-5 text-gray-900 mt-0.5 shrink-0" />
                                     <div className="text-sm text-gray-700">
                                         <strong className="font-semibold">Timely Notification alerts</strong>
                                         <br />
@@ -317,15 +332,15 @@ export default function LandingPageContent() {
                             </div>
                             <div className="space-y-4">
                                 <div className="flex items-start gap-3">
-                                    <BarChart3 className="w-5 h-5 text-cyan-600 mt-0.5 flex-shrink-0" />
+                                    <BarChart3 className="w-5 h-5 text-cyan-600 mt-0.5 shrink-0" />
                                     <span className="text-sm font-semibold text-gray-700">Advanced Team level analytics dashboard</span>
                                 </div>
                                 <div className="flex items-start gap-3">
-                                    <Shield className="w-5 h-5 text-cyan-600 mt-0.5 flex-shrink-0" />
+                                    <Shield className="w-5 h-5 text-cyan-600 mt-0.5 shrink-0" />
                                     <span className="text-sm font-semibold text-gray-700">Team level admin access to specific roles</span>
                                 </div>
                                 <div className="flex items-start gap-3">
-                                    <Search className="w-5 h-5 text-cyan-600 mt-0.5 flex-shrink-0" />
+                                    <Search className="w-5 h-5 text-cyan-600 mt-0.5 shrink-0" />
                                     <span className="text-sm font-semibold text-gray-700">Easy browse popular subscriptions/saas</span>
                                 </div>
                             </div>
@@ -337,7 +352,7 @@ export default function LandingPageContent() {
 
 
             {/* CTA Section */}
-            <section className="py-20 md:py-32 bg-[#F9FAFC] text-center">
+            <section id="email-section" className="py-20 md:py-32 bg-[#F9FAFC] text-center">
                 <div className="container mx-auto px-4 max-w-2xl">
                     <h2 className="text-3xl font-bold text-gray-900 mb-6">
                         Be the first to get updates on our development process.
