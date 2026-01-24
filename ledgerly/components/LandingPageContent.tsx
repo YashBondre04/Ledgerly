@@ -53,13 +53,13 @@ export default function LandingPageContent() {
             </div>
 
             {/* Navbar - Top Right with Glassmorphism */}
-            <header className="fixed top-4 right-4 z-50">
+            {/* <header className="fixed top-4 right-4 z-50">
                 <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-[15px] py-2 flex items-center gap-4 shadow-lg shadow-black/5">
                     <Button variant="ghost" className="text-[#6ee7b7] hover:text-[#6ee7b7]/80 hover:bg-white/10 font-medium">
                         Sign in
                     </Button>
                 </div>
-            </header>
+            </header> */}
 
             {/* Hero Section */}
             <section className="relative pt-24 pb-16 md:pt-48 md:pb-32 bg-[#060010] overflow-hidden">
