@@ -246,8 +246,18 @@ export default function LandingPage() {
             {/* How Ledgerly is Evolving Section */}
             <section className="py-20 bg-gray-50 text-center">
                 <div className="container mx-auto px-4">
-                    <h2 className="text-3xl font-bold text-gray-900 mb-4">
-                        How Ledgerly is evolving
+                    <h2 className="text-3xl font-bold text-gray-900 mb-4 inline-flex items-center justify-center gap-2">
+                        How
+                        <span className="inline-flex items-center">
+                            <Image
+                                src="/logo-horizontal-light.svg"
+                                alt="Ledgerly"
+                                width={153}
+                                height={48}
+                                className="h-12 w-auto"
+                            />
+                        </span>
+                        is evolving
                     </h2>
                     <p className="text-gray-500 max-w-2xl mx-auto mb-16">
                         We're building Ledgerly step by step, guided by real founder feedback.
@@ -340,24 +350,62 @@ export default function LandingPage() {
                 </div>
             </section>
 
-            {/* Footer */}
-            <footer className="bg-[#0f172a] text-gray-400 py-12 border-t border-gray-800">
-                <div className="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-6">
-                    <div className="flex items-center gap-2">
-                        <div className="bg-[#6EE7B7] text-[#020817] p-1 rounded w-6 h-6 flex items-center justify-center">
-                            <span className="font-bold text-xs">L</span>
+            <footer className="bg-[#060010] border-t border-gray-900 py-24">
+                <div className="container mx-auto px-4 max-w-6xl">
+                    <div className="grid md:grid-cols-3 gap-16">
+                        {/* Column 1 - Brand */}
+                        <div className="space-y-4">
+                            <div className="flex items-center gap-2">
+                                <span className="inline-flex items-center">
+                                    <Image
+                                        src="/logo-horizontal-dark.svg"
+                                        alt="Ledgerly"
+                                        width={153}
+                                        height={48}
+                                        className="h-8 w-auto"
+                                    />
+                                </span>
+                            </div>
+                            <p className="text-gray-400 text-sm">
+                                Clarity for your SaaS spend.
+                            </p>
                         </div>
-                        <span className="text-white font-semibold">Ledgerly</span>
-                    </div>
 
-                    <div className="flex gap-8 text-sm">
-                        <a href="#" className="hover:text-white transition-colors">Privacy</a>
-                        <a href="#" className="hover:text-white transition-colors">Terms</a>
-                        <a href="#" className="hover:text-white transition-colors">Contact</a>
-                    </div>
+                        {/* Column 2 - Built by */}
+                        <div>
+                            <h3 className="text-white font-semibold mb-6 text-sm">Built by</h3>
+                            <div className="space-y-6">
+                                {/* Founder 1 */}
+                                <div>
+                                    <div className="text-white font-medium text-sm mb-1">Yash Bondre</div>
+                                    <div className="flex gap-3 text-gray-500">
+                                        <a href="#" className="text-xs hover:text-white transition-colors">GitHub</a>
+                                        <a href="#" className="text-xs hover:text-white transition-colors">LinkedIn</a>
+                                    </div>
+                                </div>
+                                {/* Founder 2 */}
+                                <div>
+                                    <div className="text-white font-medium text-sm mb-1">Saikiran Chevula</div>
+                                    <div className="flex gap-3 text-gray-500">
+                                        <a href="#" className="text-xs hover:text-white transition-colors">GitHub</a>
+                                        <a href="#" className="text-xs hover:text-white transition-colors">LinkedIn</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-                    <div className="text-xs text-gray-600">
-                        © 2026 Ledgerly
+                        {/* Column 3 - Contact */}
+                        <div>
+                            <h3 className="text-white font-semibold mb-6 text-sm">Contact</h3>
+                            <div className="space-y-4">
+                                <a href="mailto:placeholder@gmail.com" className="block text-gray-400 hover:text-white transition-colors text-sm">
+                                    placeholder@gmail.com
+                                </a>
+                                <a href="#" className="block text-gray-400 hover:text-white transition-colors text-sm">
+                                    Blog
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </footer>

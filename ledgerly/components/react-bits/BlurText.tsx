@@ -9,7 +9,7 @@ interface BlurTextProps {
     animateBy?: "words" | "letters";
     direction?: "top" | "bottom";
     threshold?: number;
-    rootMargin?: string;
+    rootMargin?: NonNullable<Parameters<typeof useInView>[1]>['margin'];
     animationFrom?: Variants;
     animationTo?: Variants;
     easing?: string; // Simplification, can expose more motion transition props
