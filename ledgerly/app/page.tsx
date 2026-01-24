@@ -85,10 +85,10 @@ export default function LandingPage() {
             </section>
 
             {/* Gradient Transition */}
-            <div className="h-24 bg-linear-to-b from-[#020817] to-white" />
+            <div className="h-24 bg-linear-to-b from-[#020817] to-[#F9FAFC]" />
 
             {/* Problem Section */}
-            <section className="py-20 bg-white text-center">
+            <section className="py-20 bg-[#F9FAFC] text-center">
                 <div className="container mx-auto px-4">
                     <h2 className="text-3xl font-bold text-gray-900 mb-4">
                         The problem every growing team faces
@@ -134,7 +134,7 @@ export default function LandingPage() {
 
 
             {/* Solution Section */}
-            <section className="py-20 bg-white text-center">
+            <section className="py-20 bg-[#F9FAFC] text-center">
                 <div className="container mx-auto px-4">
                     <h2 className="text-3xl font-bold text-gray-900 mb-4">
                         From chaos to clarity in minutes
@@ -179,7 +179,7 @@ export default function LandingPage() {
             </section>
 
             {/* Dashboard Preview Section */}
-            <section className="py-20 bg-gray-50/50">
+            <section className="py-20 bg-[#F9FAFC]">
                 <div className="container mx-auto px-4 text-center">
                     <h2 className="text-3xl font-bold text-gray-900 mb-4">
                         Everything in one place
@@ -244,7 +244,7 @@ export default function LandingPage() {
             </section>
 
             {/* How Ledgerly is Evolving Section */}
-            <section className="py-20 bg-gray-50 text-center">
+            <section className="py-20 bg-[#F9FAFC] text-center">
                 <div className="container mx-auto px-4">
                     <h2 className="text-3xl font-bold text-gray-900 mb-4 inline-flex items-center justify-center gap-2">
                         How
@@ -327,7 +327,7 @@ export default function LandingPage() {
 
 
             {/* CTA Section */}
-            <section className="py-32 bg-white text-center">
+            <section className="py-32 bg-[#F9FAFC] text-center">
                 <div className="container mx-auto px-4 max-w-2xl">
                     <h2 className="text-3xl font-bold text-gray-900 mb-6">
                         Be the first to get updates on our development process.
