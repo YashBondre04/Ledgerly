@@ -12,15 +12,10 @@ import {
     ArrowRight,
     CheckCircle2,
     Zap,
-    Eye,
-    AlertCircle,
-    GitBranch,
-    Building2,
     Bell,
     Shield
 } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 import LightRays from "@/components/react-bits/LightRays";
 
 export default function LandingPage() {
