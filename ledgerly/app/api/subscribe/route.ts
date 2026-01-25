@@ -1,10 +1,6 @@
 import { NextResponse } from 'next/server';
-import { MailerSend, EmailParams, Sender, Recipient } from 'mailersend';
+import nodemailer from 'nodemailer';
 import { DataStore, Subscriber } from '@/lib/storage';
-
-const mailerSend = new MailerSend({
-    apiKey: process.env.MAILERSEND_API_KEY || '',
-});
 
 const SURVEY_LINK = "https://forms.gle/YOUR_GOOGLE_FORM_LINK_HERE"; // Placeholder, user should update
 
@@ -47,19 +43,19 @@ export async function POST(request: Request) {
             );
         }
 
-        // 4. Send Confirmation Email via MailerSend
+        // 4. Send Confirmation Email via Gmail SMTP
         try {
             console.log('Attempting to send email to:', email);
 
-            const sentFrom = new Sender('trial@test-eqvygm0ejvzl0p7w.mlsender.net', 'Ledgerly Team');
-            const recipients = [new Recipient(email)];
+            const transporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                    user: process.env.GMAIL_USER,
+                    pass: process.env.GMAIL_APP_PASSWORD,
+                },
+            });
 
-            const emailParams = new EmailParams()
-                .setFrom(sentFrom)
-                .setTo(recipients)
-                .setReplyTo(new Sender('ledgerlysass@gmail.com', 'Ledgerly Team'))
-                .setSubject('Welcome to Ledgerly Early Access')
-                .setHtml(`
+            const emailHtml = `
                 <div style="font-family: sans-serif; color: #333; line-height: 1.5;">
                     <h2>Thank you for joining Ledgerly!</h2>
                     <p>Hi there,</p>
@@ -74,10 +70,18 @@ export async function POST(request: Request) {
                     <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
                     <p style="font-size: 12px; color: #888;">You received this because you signed up on our website. We are currently in active development.</p>
                 </div>
-            `);
+            `;
 
-            const emailResult = await mailerSend.email.send(emailParams);
-            console.log('MailerSend API Response:', JSON.stringify(emailResult, null, 2));
+            const mailOptions = {
+                from: '"Ledgerly Team" <ledgerlysass@gmail.com>',
+                to: email,
+                subject: 'Welcome to Ledgerly Early Access',
+                html: emailHtml,
+            };
+
+            const info = await transporter.sendMail(mailOptions);
+            console.log('Email sent:', info.messageId);
+
         } catch (emailError) {
             console.error('Email sending failed, but subscriber was saved:', emailError);
             // We do NOT return an error here, because the subscription itself was successful.
