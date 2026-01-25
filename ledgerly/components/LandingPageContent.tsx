@@ -13,7 +13,9 @@ import {
     CheckCircle2,
     Zap,
     Bell,
-    Shield
+    Shield,
+    Github,
+    Linkedin
 } from "lucide-react";
 import Image from "next/image";
 import LightRays from "@/components/react-bits/LightRays";
@@ -101,7 +103,7 @@ export default function LandingPageContent() {
             </header> */}
 
             {/* Hero Section */}
-            <section className="relative pt-24 pb-16 md:pt-48 md:pb-32 bg-[#060010] overflow-hidden">
+            <section className="relative min-h-screen flex flex-col justify-center bg-[#060010] overflow-hidden py-12 md:pt-48 md:pb-32 md:min-h-0">
                 {/* Light Rays Effect - Only rendered on client to avoid mismatch if it has random/window usage */}
                 <div className="absolute inset-0">
                     {mounted && (
@@ -124,7 +126,7 @@ export default function LandingPageContent() {
 
                 <div className="container mx-auto px-4 text-center text-white relative z-10 w-full flex flex-col items-center">
                     <h1 className="text-3xl md:text-6xl font-bold tracking-tight mb-6 max-w-4xl mx-auto leading-tight">
-                        Track every subscription and recurring cost you’re paying for
+                        Track every subscription and recurring cost you're paying for
                     </h1>
                     <p className="text-gray-400 text-lg md:text-xl mb-10 max-w-2xl mx-auto leading-relaxed px-2">
                         Ledgerly gives founders a single, clear view of all SaaS subscriptions, owners, and monthly spend — without spreadsheets or finance headaches.
@@ -432,61 +434,85 @@ export default function LandingPageContent() {
                 </div>
             </section>
 
-            <footer className="bg-[#060010] border-t border-gray-900 py-12 md:py-24">
-                <div className="container mx-auto px-4 max-w-6xl">
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16">
-                        {/* Column 1 - Brand */}
-                        <div className="space-y-4 text-center md:text-left">
-                            <div className="flex items-center justify-center md:justify-start gap-2">
-                                <span className="inline-flex items-center">
-                                    <Image
-                                        src="/logo-horizontal-dark.svg"
-                                        alt="Ledgerly"
-                                        width={153}
-                                        height={48}
-                                        className="h-8 w-auto"
-                                        style={{ width: 'auto' }}
-                                    />
-                                </span>
+            {/* Gradient Transition to Footer */}
+            <div className="h-6 bg-gradient-to-b from-[#F9FAFC] to-[#060010]" />
+
+            <footer className="bg-[#060010] pt-12 pb-8 md:pt-16 md:pb-10">
+                <div className="container mx-auto px-4 max-w-4xl">
+                    {/* Main Footer Content */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
+                        {/* Left Side - Brand & Contact */}
+                        <div className="space-y-6 text-center md:text-left">
+                            <div className="flex items-center justify-center md:justify-start">
+                                <Image
+                                    src="/logo-horizontal-dark.svg"
+                                    alt="Ledgerly"
+                                    width={153}
+                                    height={48}
+                                    className="h-8 w-auto"
+                                    style={{ width: 'auto' }}
+                                />
                             </div>
-                            <p className="text-gray-400 text-sm">
-                                Clarity for your SaaS spend.
+                            <p className="text-gray-400 text-sm max-w-xs mx-auto md:mx-0">
+                                Clarity for your SaaS spend. Track every subscription and recurring cost in one place.
                             </p>
+                            <div className="space-y-2">
+                                <a href="mailto:ledgerlysass@gmail.com" className="block text-gray-400 hover:text-white transition-colors text-sm">
+                                    ledgerlysass@gmail.com
+                                </a>
+                            </div>
                         </div>
 
-                        {/* Column 2 - Built by */}
+                        {/* Right Side - Founders */}
                         <div className="text-center md:text-left">
-                            <h3 className="text-white font-semibold mb-6 text-sm">Built by</h3>
-                            <div className="space-y-6">
-                                {/* Founder 1 */}
-                                <div>
-                                    <div className="text-white font-medium text-sm mb-1">Yash Bondre</div>
-                                    <div className="flex justify-center md:justify-start gap-3 text-gray-500">
-                                        <a href="https://github.com/YashBondre04" className="text-xs hover:text-white transition-colors">GitHub</a>
-                                        <a href="https://www.linkedin.com/in/yash-bondre/" className="text-xs hover:text-white transition-colors">LinkedIn</a>
+                            <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-6">Built by</h3>
+                            <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                                {/* Founder Card 1 */}
+                                <div className="bg-white/5 border border-white/10 rounded-xl p-4 flex items-center gap-4 hover:bg-white/10 transition-colors">
+                                    <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                                        YB
+                                    </div>
+                                    <div>
+                                        <div className="text-white font-medium text-sm">Yash Bondre</div>
+                                        <div className="flex gap-2 mt-1">
+                                            <a href="https://github.com/YashBondre04" className="text-gray-500 hover:text-white transition-colors p-1 hover:bg-white/10 rounded">
+                                                <Github className="w-4 h-4" />
+                                            </a>
+                                            <a href="https://www.linkedin.com/in/yash-bondre/" className="text-gray-500 hover:text-white transition-colors p-1 hover:bg-white/10 rounded">
+                                                <Linkedin className="w-4 h-4" />
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
-                                {/* Founder 2 */}
-                                <div>
-                                    <div className="text-white font-medium text-sm mb-1">Saikiran Chevula</div>
-                                    <div className="flex justify-center md:justify-start gap-3 text-gray-500">
-                                        <a href="https://github.com/SaikiranC08" className="text-xs hover:text-white transition-colors">GitHub</a>
-                                        <a href="https://www.linkedin.com/in/saikiran-chevula/" className="text-xs hover:text-white transition-colors">LinkedIn</a>
+                                {/* Founder Card 2 */}
+                                <div className="bg-white/5 border border-white/10 rounded-xl p-4 flex items-center gap-4 hover:bg-white/10 transition-colors">
+                                    <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-400 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                                        SC
+                                    </div>
+                                    <div>
+                                        <div className="text-white font-medium text-sm">Saikiran Chevula</div>
+                                        <div className="flex gap-2 mt-1">
+                                            <a href="https://github.com/SaikiranC08" className="text-gray-500 hover:text-white transition-colors p-1 hover:bg-white/10 rounded">
+                                                <Github className="w-4 h-4" />
+                                            </a>
+                                            <a href="https://www.linkedin.com/in/saikiran-chevula/" className="text-gray-500 hover:text-white transition-colors p-1 hover:bg-white/10 rounded">
+                                                <Linkedin className="w-4 h-4" />
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
 
-                        {/* Column 3 - Contact */}
-                        <div className="text-center md:text-left">
-                            <h3 className="text-white font-semibold mb-6 text-sm">Contact</h3>
-                            <div className="space-y-4">
-                                <a href="mailto:placeholder@gmail.com" className="block text-gray-400 hover:text-white transition-colors text-sm">
-                                    placeholder@gmail.com
-                                </a>
-                                <a href="#" className="block text-gray-400 hover:text-white transition-colors text-sm">
-                                    Blog
-                                </a>
+                    {/* Divider */}
+                    <div className="border-t border-white/10 pt-6">
+                        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-500">
+                            <p>© 2026 Ledgerly. All rights reserved.</p>
+                            <div className="flex gap-6">
+                                <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
+                                <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
+                                <a href="#" className="hover:text-white transition-colors">Blog</a>
                             </div>
                         </div>
                     </div>

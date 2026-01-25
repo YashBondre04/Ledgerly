@@ -1,8 +1,11 @@
 import { NextResponse } from 'next/server';
-import { Resend } from 'resend';
+import { MailerSend, EmailParams, Sender, Recipient } from 'mailersend';
 import { DataStore, Subscriber } from '@/lib/storage';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const mailerSend = new MailerSend({
+    apiKey: process.env.MAILERSEND_API_KEY || '',
+});
+
 const SURVEY_LINK = "https://forms.gle/YOUR_GOOGLE_FORM_LINK_HERE"; // Placeholder, user should update
 
 export async function POST(request: Request) {
@@ -44,14 +47,18 @@ export async function POST(request: Request) {
             );
         }
 
-        // 4. Send Confirmation Email via Resend
+        // 4. Send Confirmation Email via MailerSend
         console.log('Attempting to send email to:', email);
-        const emailResult = await resend.emails.send({
-            from: 'Ledgerly Team <onboarding@resend.dev>', // Resend default domain
-            to: email,
-            replyTo: 'yashbondre04@gmail.com', // Placeholder
-            subject: 'Welcome to Ledgerly Early Access',
-            html: `
+
+        const sentFrom = new Sender('trial@test-eqvygm0ejvzl0p7w.mlsender.net', 'Ledgerly Team');
+        const recipients = [new Recipient(email)];
+
+        const emailParams = new EmailParams()
+            .setFrom(sentFrom)
+            .setTo(recipients)
+            .setReplyTo(new Sender('ledgerlysass@gmail.com', 'Ledgerly Team'))
+            .setSubject('Welcome to Ledgerly Early Access')
+            .setHtml(`
                 <div style="font-family: sans-serif; color: #333; line-height: 1.5;">
                     <h2>Thank you for joining Ledgerly!</h2>
                     <p>Hi there,</p>
@@ -66,9 +73,10 @@ export async function POST(request: Request) {
                     <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
                     <p style="font-size: 12px; color: #888;">You received this because you signed up on our website. We are currently in active development.</p>
                 </div>
-            `
-        });
-        console.log('Resend API Response:', JSON.stringify(emailResult, null, 2));
+            `);
+
+        const emailResult = await mailerSend.email.send(emailParams);
+        console.log('MailerSend API Response:', JSON.stringify(emailResult, null, 2));
 
         return NextResponse.json({ success: true });
 
