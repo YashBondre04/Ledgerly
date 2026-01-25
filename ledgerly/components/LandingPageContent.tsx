@@ -510,8 +510,8 @@ export default function LandingPageContent() {
                         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-500">
                             <p>© 2026 Ledgerly. All rights reserved.</p>
                             <div className="flex gap-6">
-                                <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-                                <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
+                                <a href="#" className="hover:text-white transition-colors">Privacy-Policy</a>
+                                <a href="#" className="hover:text-white transition-colors">Terms-of-Service</a>
                                 <a href="#" className="hover:text-white transition-colors">Blog</a>
                             </div>
                         </div>
