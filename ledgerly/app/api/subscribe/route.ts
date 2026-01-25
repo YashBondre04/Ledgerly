@@ -48,17 +48,18 @@ export async function POST(request: Request) {
         }
 
         // 4. Send Confirmation Email via MailerSend
-        console.log('Attempting to send email to:', email);
+        try {
+            console.log('Attempting to send email to:', email);
 
-        const sentFrom = new Sender('trial@test-eqvygm0ejvzl0p7w.mlsender.net', 'Ledgerly Team');
-        const recipients = [new Recipient(email)];
+            const sentFrom = new Sender('trial@test-eqvygm0ejvzl0p7w.mlsender.net', 'Ledgerly Team');
+            const recipients = [new Recipient(email)];
 
-        const emailParams = new EmailParams()
-            .setFrom(sentFrom)
-            .setTo(recipients)
-            .setReplyTo(new Sender('ledgerlysass@gmail.com', 'Ledgerly Team'))
-            .setSubject('Welcome to Ledgerly Early Access')
-            .setHtml(`
+            const emailParams = new EmailParams()
+                .setFrom(sentFrom)
+                .setTo(recipients)
+                .setReplyTo(new Sender('ledgerlysass@gmail.com', 'Ledgerly Team'))
+                .setSubject('Welcome to Ledgerly Early Access')
+                .setHtml(`
                 <div style="font-family: sans-serif; color: #333; line-height: 1.5;">
                     <h2>Thank you for joining Ledgerly!</h2>
                     <p>Hi there,</p>
@@ -75,8 +76,12 @@ export async function POST(request: Request) {
                 </div>
             `);
 
-        const emailResult = await mailerSend.email.send(emailParams);
-        console.log('MailerSend API Response:', JSON.stringify(emailResult, null, 2));
+            const emailResult = await mailerSend.email.send(emailParams);
+            console.log('MailerSend API Response:', JSON.stringify(emailResult, null, 2));
+        } catch (emailError) {
+            console.error('Email sending failed, but subscriber was saved:', emailError);
+            // We do NOT return an error here, because the subscription itself was successful.
+        }
 
         return NextResponse.json({ success: true });
 
