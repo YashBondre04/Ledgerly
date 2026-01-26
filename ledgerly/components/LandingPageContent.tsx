@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import LightRays from "@/components/react-bits/LightRays";
+import TeamViewAccordion from "@/components/TeamViewAccordion";
 import { useEffect, useState } from "react";
 
 export default function LandingPageContent() {
@@ -307,6 +308,9 @@ export default function LandingPageContent() {
                     </div>
                 </div>
             </section>
+
+            {/* Advanced Team View Accordion */}
+            <TeamViewAccordion />
 
             {/* How Ledgerly is Evolving Section */}
             <section className="py-12 md:py-20 bg-[#F9FAFC] text-center">
