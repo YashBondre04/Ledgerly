@@ -19,7 +19,6 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import LightRays from "@/components/react-bits/LightRays";
-import TeamViewAccordion from "@/components/TeamViewAccordion";
 import { useEffect, useState } from "react";
 
 export default function LandingPageContent() {
@@ -135,7 +134,7 @@ export default function LandingPageContent() {
                     <div className="flex flex-col w-full sm:w-auto sm:flex-row items-center justify-center gap-4">
                         <Button
                             onClick={() => scrollToSection('email-section')}
-                            className="bg-blue-700 hover:bg-blue-600 text-white px-8 py-6 text-lg rounded-full w-full sm:w-auto"
+                            className="bg-white/10 backdrop-blur-sm border border-white/30 hover:bg-white/20 text-white px-8 py-6 text-lg rounded-full w-full sm:w-auto shadow-lg transition-all"
                         >
                             In pre production
                         </Button>
@@ -310,6 +309,147 @@ export default function LandingPageContent() {
             </section>
 
 
+            {/* Built to Scale with Your Team Section */}
+            <section className="py-16 md:py-24 bg-[#F9FAFC]">
+                <div className="container mx-auto px-4 max-w-6xl">
+                    {/* Section Header */}
+                    <div className="text-center mb-16">
+                        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                            Built to scale with your team
+                        </h2>
+                        <p className="text-gray-600 text-lg max-w-2xl mx-auto leading-relaxed">
+                            Start simple. As your team grows, Ledgerly gives you deeper visibility, control, and accountability.
+                        </p>
+                    </div>
+
+                    {/* Main Content Card */}
+                    <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+                        <div className="grid grid-cols-1 lg:grid-cols-2">
+                            {/* LEFT SIDE - Image */}
+                            <div className="order-2 lg:order-1 bg-linear-to-br from-gray-50 to-white p-8 md:p-12 flex items-center justify-center">
+                                <div className="relative w-full max-w-md">
+                                    <Image
+                                        src="/hierarchical-team-view.jpg"
+                                        alt="Hierarchical team view showing organization structure with roles and permissions"
+                                        width={600}
+                                        height={800}
+                                        className="w-full h-auto rounded-lg shadow-md"
+                                        style={{ width: '100%', height: 'auto' }}
+                                    />
+                                </div>
+                            </div>
+
+                            {/* RIGHT SIDE - Features List */}
+                            <div className="order-1 lg:order-2 p-8 md:p-12 flex flex-col justify-between min-h-[600px]">
+                                <div className="space-y-8">
+                                    {/* Feature 1 */}
+                                    <div className="flex items-start gap-4">
+                                        <div className="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center shrink-0 mt-1">
+                                            <div className="w-2.5 h-2.5 rounded-full bg-blue-600" />
+                                        </div>
+                                        <div>
+                                            <h3 className="text-lg font-semibold text-gray-900 mb-1">
+                                                Organize by teams and sub-teams
+                                            </h3>
+                                            <p className="text-gray-600 text-sm leading-relaxed">
+                                                Structure subscriptions the way your company actually works
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    {/* Feature 2 */}
+                                    <div className="flex items-start gap-4">
+                                        <div className="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center shrink-0 mt-1">
+                                            <div className="w-2.5 h-2.5 rounded-full bg-blue-600" />
+                                        </div>
+                                        <div>
+                                            <h3 className="text-lg font-semibold text-gray-900 mb-1">
+                                                Role-based access control
+                                            </h3>
+                                            <p className="text-gray-600 text-sm leading-relaxed">
+                                                Admins, managers, and members see only what they need
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    {/* Feature 3 */}
+                                    <div className="flex items-start gap-4">
+                                        <div className="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center shrink-0 mt-1">
+                                            <div className="w-2.5 h-2.5 rounded-full bg-blue-600" />
+                                        </div>
+                                        <div>
+                                            <h3 className="text-lg font-semibold text-gray-900 mb-1">
+                                                Team-level analytics
+                                            </h3>
+                                            <p className="text-gray-600 text-sm leading-relaxed">
+                                                Track spending and usage patterns by department
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    {/* Feature 4 */}
+                                    <div className="flex items-start gap-4">
+                                        <div className="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center shrink-0 mt-1">
+                                            <div className="w-2.5 h-2.5 rounded-full bg-blue-600" />
+                                        </div>
+                                        <div>
+                                            <h3 className="text-lg font-semibold text-gray-900 mb-1">
+                                                Smart renewal alerts
+                                            </h3>
+                                            <p className="text-gray-600 text-sm leading-relaxed">
+                                                Get notified via email and WhatsApp before charges hit
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Progressive Disclosure */}
+                                <div className="mt-6 pt-8 border-t border-gray-100 min-h-[140px]">
+                                    <button
+                                        onClick={() => {
+                                            const detailsEl = document.getElementById('team-access-details');
+                                            if (detailsEl) {
+                                                const isExpanded = detailsEl.style.maxHeight && detailsEl.style.maxHeight !== '0px';
+                                                if (isExpanded) {
+                                                    detailsEl.style.maxHeight = '0px';
+                                                    detailsEl.style.opacity = '0';
+                                                    detailsEl.style.marginTop = '0px';
+                                                } else {
+                                                    detailsEl.style.maxHeight = '200px';
+                                                    detailsEl.style.opacity = '1';
+                                                    detailsEl.style.marginTop = '1rem';
+                                                }
+                                                const arrow = document.getElementById('learn-more-arrow');
+                                                if (arrow) {
+                                                    arrow.style.transform = isExpanded ? 'rotate(0deg)' : 'rotate(90deg)';
+                                                }
+                                            }
+                                        }}
+                                        className="text-blue-600 hover:text-blue-700 font-medium text-sm flex items-center gap-2 transition-colors"
+                                    >
+                                        Learn more about team-level access
+                                        <ArrowRight
+                                            id="learn-more-arrow"
+                                            className="w-4 h-4 transition-transform duration-300"
+                                        />
+                                    </button>
+                                    <div
+                                        id="team-access-details"
+                                        className="text-sm text-gray-600 leading-relaxed bg-gray-50 p-4 rounded-lg overflow-hidden transition-all duration-300 ease-in-out"
+                                        style={{ maxHeight: '0px', opacity: '0', marginTop: '0px' }}
+                                    >
+                                        <p>
+                                            As your team expands, assign different permission levels to control who can view, edit, or approve subscription changes. Analytics are automatically grouped by team, giving managers visibility into their spending without exposing company-wide data.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
             {/* How Ledgerly is Evolving Section */}
             <section className="py-12 md:py-20 bg-[#F9FAFC] text-center">
                 <div className="container mx-auto px-4">
@@ -333,32 +473,35 @@ export default function LandingPageContent() {
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-4xl mx-auto">
                         {/* On Release Card */}
-                        <div className="bg-white border border-gray-200 rounded-xl p-8 text-left shadow-sm hover:shadow-md transition-shadow h-full">
-                            <div className="flex items-center gap-3 mb-6">
-                                <div className="w-10 h-10 bg-blue-900 rounded-lg flex items-center justify-center">
-                                    <CheckCircle2 className="text-white w-5 h-5" />
-                                </div>
-                                <h3 className="text-xl font-bold text-gray-900">On Release</h3>
-                            </div>
-                            <div className="space-y-4">
-                                <div className="flex items-start gap-3">
-                                    <Zap className="w-5 h-5 text-gray-900 mt-0.5 shrink-0" />
-                                    <span className="text-sm font-semibold text-gray-700">Quick setup</span>
-                                </div>
-                                <div className="flex items-start gap-3">
-                                    <FileText className="w-5 h-5 text-gray-900 mt-0.5 shrink-0" />
-                                    <div className="text-sm text-gray-700">
-                                        <strong className="font-semibold">Manual subscription</strong>
-                                        <br />
-                                        <span className="text-gray-500">tracking</span>
+                        <div className="bg-white border border-gray-200 rounded-xl p-8 text-left shadow-sm hover:shadow-md transition-shadow h-full relative overflow-hidden">
+                            <div className="absolute top-0 right-0 w-32 h-32 bg-blue-50 rounded-bl-full -mr-16 -mt-16"></div>
+                            <div className="relative z-10">
+                                <div className="flex items-center gap-3 mb-6">
+                                    <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
+                                        <CheckCircle2 className="text-white w-5 h-5" />
                                     </div>
+                                    <h3 className="text-xl font-bold text-gray-900">On Release</h3>
                                 </div>
-                                <div className="flex items-start gap-3">
-                                    <Bell className="w-5 h-5 text-gray-900 mt-0.5 shrink-0" />
-                                    <div className="text-sm text-gray-700">
-                                        <strong className="font-semibold">Timely Notification alerts</strong>
-                                        <br />
-                                        <span className="text-gray-500">(gmail/whatsapp)</span>
+                                <div className="space-y-4">
+                                    <div className="flex items-start gap-3">
+                                        <Zap className="w-5 h-5 text-gray-900 mt-0.5 shrink-0" />
+                                        <span className="text-sm font-semibold text-gray-700">Quick setup</span>
+                                    </div>
+                                    <div className="flex items-start gap-3">
+                                        <FileText className="w-5 h-5 text-gray-900 mt-0.5 shrink-0" />
+                                        <div className="text-sm text-gray-700">
+                                            <strong className="font-semibold">Manual subscription</strong>
+                                            <br />
+                                            <span className="text-gray-500">tracking</span>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-start gap-3">
+                                        <Bell className="w-5 h-5 text-gray-900 mt-0.5 shrink-0" />
+                                        <div className="text-sm text-gray-700">
+                                            <strong className="font-semibold">Timely Notification alerts</strong>
+                                            <br />
+                                            <span className="text-gray-500">(gmail/whatsapp)</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -366,24 +509,24 @@ export default function LandingPageContent() {
 
                         {/* Future Plans Card */}
                         <div className="bg-white border border-blue-200 rounded-xl p-8 text-left shadow-sm hover:shadow-md transition-shadow relative overflow-hidden h-full">
-                            <div className="absolute top-0 right-0 w-32 h-32 bg-blue-50 rounded-bl-full -mr-16 -mt-16"></div>
+                            <div className="absolute top-0 right-0 w-32 h-32 bg-green-50 rounded-bl-full -mr-16 -mt-16"></div>
                             <div className="flex items-center gap-3 mb-6 relative z-10">
-                                <div className="w-10 h-10 bg-cyan-500 rounded-lg flex items-center justify-center">
+                                <div className="w-10 h-10 bg-green-400 rounded-lg flex items-center justify-center">
                                     <Zap className="text-white w-5 h-5" />
                                 </div>
                                 <h3 className="text-xl font-bold text-gray-900">Future Plans</h3>
                             </div>
                             <div className="space-y-4">
                                 <div className="flex items-start gap-3">
-                                    <BarChart3 className="w-5 h-5 text-cyan-600 mt-0.5 shrink-0" />
+                                    <BarChart3 className="w-5 h-5 text-green-400 mt-0.5 shrink-0" />
                                     <span className="text-sm font-semibold text-gray-700">Advanced Team level analytics dashboard</span>
                                 </div>
                                 <div className="flex items-start gap-3">
-                                    <Shield className="w-5 h-5 text-cyan-600 mt-0.5 shrink-0" />
+                                    <Shield className="w-5 h-5 text-green-400 mt-0.5 shrink-0" />
                                     <span className="text-sm font-semibold text-gray-700">Team level admin access to specific roles</span>
                                 </div>
                                 <div className="flex items-start gap-3">
-                                    <Search className="w-5 h-5 text-cyan-600 mt-0.5 shrink-0" />
+                                    <Search className="w-5 h-5 text-green-400 mt-0.5 shrink-0" />
                                     <span className="text-sm font-semibold text-gray-700">Easy browse popular subscriptions/saas</span>
                                 </div>
                             </div>
@@ -392,8 +535,6 @@ export default function LandingPageContent() {
                 </div>
             </section>
 
-            {/* Advanced Team View Accordion */}
-            <TeamViewAccordion />
 
             {/* CTA Section */}
             <section id="email-section" className="py-20 md:py-32 bg-[#F9FAFC] text-center">
@@ -438,7 +579,7 @@ export default function LandingPageContent() {
             </section>
 
             {/* Gradient Transition to Footer */}
-            <div className="h-6 bg-gradient-to-b from-[#F9FAFC] to-[#060010]" />
+            <div className="h-6 bg-linear-to-b from-[#F9FAFC] to-[#060010]" />
 
             <footer className="bg-[#060010] pt-12 pb-8 md:pt-16 md:pb-10">
                 <div className="container mx-auto px-4 max-w-4xl">
@@ -472,7 +613,7 @@ export default function LandingPageContent() {
                             <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
                                 {/* Founder Card 1 */}
                                 <div className="bg-white/5 border border-white/10 rounded-xl p-4 flex items-center gap-4 hover:bg-white/10 transition-colors">
-                                    <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                                    <div className="w-10 h-10 bg-linear-to-br from-blue-500 to-cyan-400 rounded-full flex items-center justify-center text-white font-bold text-sm">
                                         YB
                                     </div>
                                     <div>
@@ -489,7 +630,7 @@ export default function LandingPageContent() {
                                 </div>
                                 {/* Founder Card 2 */}
                                 <div className="bg-white/5 border border-white/10 rounded-xl p-4 flex items-center gap-4 hover:bg-white/10 transition-colors">
-                                    <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-400 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                                    <div className="w-10 h-10 bg-linear-to-br from-purple-500 to-pink-400 rounded-full flex items-center justify-center text-white font-bold text-sm">
                                         SC
                                     </div>
                                     <div>
