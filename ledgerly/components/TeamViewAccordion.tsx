@@ -26,7 +26,7 @@ export default function TeamViewAccordion() {
                     >
                         <div className="flex-1 text-left">
                             <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-1">
-                                Advanced team visibility (optional)
+                                Advanced team visibility
                             </h3>
                             <p className="text-sm text-gray-500">
                                 For growing teams that need deeper control and clarity

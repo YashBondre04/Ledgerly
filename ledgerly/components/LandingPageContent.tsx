@@ -309,8 +309,6 @@ export default function LandingPageContent() {
                 </div>
             </section>
 
-            {/* Advanced Team View Accordion */}
-            <TeamViewAccordion />
 
             {/* How Ledgerly is Evolving Section */}
             <section className="py-12 md:py-20 bg-[#F9FAFC] text-center">
@@ -394,7 +392,8 @@ export default function LandingPageContent() {
                 </div>
             </section>
 
-
+            {/* Advanced Team View Accordion */}
+            <TeamViewAccordion />
 
             {/* CTA Section */}
             <section id="email-section" className="py-20 md:py-32 bg-[#F9FAFC] text-center">
